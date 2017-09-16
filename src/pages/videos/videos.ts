@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
+import {VideoPlayer, VideoOptions} from '@ionic-native/video-player';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-videos',
@@ -15,6 +17,7 @@ export class VideosPage {
   watchedVideos: any[] = [];
   constructor(public navCtrl: NavController,  
               public navParams: NavParams,
+              private iab: InAppBrowser,
               public storage: Storage) {
     // console.log(JSON.stringify(this.navParams.data));
     this.week = this.navParams.get('w');
@@ -39,6 +42,41 @@ export class VideosPage {
     // this.week = this.navParams.data;
     // console.log(this.week);
   }
+
+
+androidPlayVideo(path){
+
+  var target = "_blank";
+  var vidStyle = "video{webkitDisplayingFullscreen:true;background:#54899b;}";
+  var options = "location=no,hidden=yes,clearcache=yes,clearsessioncache=yes,hardwareback=no,shouldPauseOnSuspend=yes";
+  console.log("Loading Under Construction Page")
+  console.log("Playing video located at: ",path);
+  //var vidPlayer = this.iab.create(path, target, options);
+var vidPlayer = this.iab.create("assets/img/UnderConstruction.jpg",target,options);
+vidPlayer.insertCSS({ code: vidStyle});
+vidPlayer.show();
+}
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+/* Default Code */
+  /***********************/
+  /*
   playVideo(id){
     let video:any;
     video = document.getElementById(id);
@@ -51,6 +89,8 @@ export class VideosPage {
     }
     video.play();
   }
+
+
   onFullscreen(e) {
     //TODO: Handle tab bar overlay
     // let tabbar:any;
@@ -98,5 +138,7 @@ export class VideosPage {
   //     });
   //   })
   // }
+  //END DEFAULT CODE
+  /************************************/
   
 }

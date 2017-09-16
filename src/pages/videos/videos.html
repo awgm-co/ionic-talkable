@@ -16,48 +16,35 @@
 <ion-content id="videoPage">
   <div class="description">{{week.description }}</div>
   <ion-card *ngFor="let v of week.videos" text-wrap>
-     <!-- <video fullscreen="fullscreen" controls>
-      <source src="https://www.youtube.com/embed/q8f-DoL1dqQ" type="video/mp4">  
-    </video> -->
-      
+<!-- Android Specific Video Player -->
+<ion-item (click)="androidPlayVideo(v.path)">
+<button ion-button clear item-end large [color]="color"><ion-icon name="play"></ion-icon></button>
+<h1 class="video-title">{{v.title}}</h1>
+</ion-item>
+</ion-card>
+</ion-content>
+
+
+
+
+<!-- Default video player 
+
+  <ion-content id="videoPage">
+  <div class="description">{{week.description }}</div>
+  <ion-card *ngFor="let v of week.videos" text-wrap>
     <video [attr.id]='v.path' controls class="video" poster="assets/img/vidthumb.jpg"  width="100%" (ended)="watched(v, $event);" style="position:absolute; z-index:99999;" hidden>
         <source [attr.src]="v.path" type='video/mp4' >
     </video>
-    
+ 
     <ion-item (click)='playVideo(v.path)'>
         <button ion-button clear item-end large [color]="color"><ion-icon name="play"></ion-icon></button>
-        <!-- <ion-thumbnail item-end >
-          <img src="assets/img/vidthumb.jpg" style="object-fit:cover">
-        </ion-thumbnail> -->
         <h1 class="video-title">{{v.title}}</h1>
-       <!-- <p>{{v.description}}</p> -->
-      </ion-item>
-    </ion-card>
-    <!-- <ion-card-content>
-      <ion-card-title>
-        <ion-icon *ngIf='watchedVideos?.includes(v.id)' name='eye' item-start></ion-icon> 
-        {{ v.title }}
-        <ion-icon name="play" item-end ></ion-icon>
-        <ion-thumbnail item-end>
-            <img src="assets/img/vidthumb.jpg" alt="poster"  (click)='playVideo(v.id)'>
-        </ion-thumbnail>
-        
-      </ion-card-title>
-      
-      <p>
-        {{ v.description }}
-      </p>
-      
-    </ion-card-content> -->
-    <!-- <ion-item *ngFor="let v of week.videos"
-              attr.id="videos-list-{{v.title}}">
-      <ion-thumbnail item-left="">
-        <img />
-      </ion-thumbnail>
-      <h2>{{ v.title }}</h2>
-      <p>{{ v.description }}</p>
-    </ion-item> -->
-  
-</ion-content>
+         </ion-item>
+            </ion-card>
+            </ion-content>
+-->  
+     
+ 
+
 
 

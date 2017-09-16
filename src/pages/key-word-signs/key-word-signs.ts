@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController  } from 'ionic-angular';
 import { FileServiceProvider } from "../../providers/file-service/file-service";
 // import { StreamingMedia, StreamingVideoOptions } from '@ionic-native/streaming-media';
-
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-key-word-signs',
@@ -14,7 +14,7 @@ export class KeyWordSignsPage {
   filteredSigns: any = [];
   filteredSignsChunks: any = [];
   video: any;
-  constructor(public navCtrl: NavController, public fs: FileServiceProvider) {
+  constructor(private iab: InAppBrowser,public navCtrl: NavController, public fs: FileServiceProvider) {
      // Show the loading message
     // let loadingPopup = this.loadingCtrl.create({
     //   content: 'Loading posts...'
@@ -35,6 +35,20 @@ export class KeyWordSignsPage {
     
     
     
+  }
+  androidPlayVideo(path){
+    var word = path.toString();
+    word = path.toLowerCase();
+    console.log("path:",path);
+    console.log("word:",word);
+    var keyPath = "assets/vid/"+word+".mp4";
+    var target = "_blank";
+    var vidStyle = "video{webkitDisplayingFullscreen:false;background:#54899b;}";
+    var options = "location=no,hidden=yes,clearcache=yes,clearsessioncache=yes,hardwareback=no,shouldPauseOnSuspend=yes";
+    console.log("Playing video located at: ",keyPath);
+  var vidPlayer = this.iab.create(keyPath, target, options);
+  vidPlayer.insertCSS({ code: vidStyle});
+  vidPlayer.show();
   }
   playVideo(id){
     let video:any;

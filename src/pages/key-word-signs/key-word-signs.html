@@ -13,9 +13,17 @@
 </ion-header>
 <ng-template #loading><ion-spinner></ion-spinner></ng-template>
 <ion-content id="keyWordSignsPage">
-    
   <ion-list *ngIf="signs">
     <ion-item *ngIf='signs?.length == 0' text-wrap>No Results Found. <br> For more key words, visit http://auslan.org.au</ion-item>
+    <ion-item *ngFor='let word of signs' (click)='androidPlayVideo(word)'>
+    {{ word }}
+    <button ion-button clear item-end (click)='androidPlayVideo(word)'><ion-icon name="play"></ion-icon></button>
+  </ion-item>
+
+   
+  <!--
+     <img [src]="filteredWordList[word.key].image" [alt]="signs.word">
+ 
     <ion-item *ngFor='let word of signs' (click)='playVideo(word)'>
         <video [attr.id]='word' controls class="video" poster="assets/img/vidthumb.jpg"  width="100%" (ended)="watched(word, $event);" hidden>
           <source [attr.src]="'assets/vid/' + word.toLowerCase() + '.mp4'" type='video/mp4' >
@@ -23,11 +31,11 @@
       {{ word }}
       <button ion-button clear item-end (click)='playVideo(word)'><ion-icon name="play"></ion-icon>  </button>
       
-      <!-- <img [src]="filteredWordList[word.key].image" [alt]="signs.word">  -->
+     <img [src]="filteredWordList[word.key].image" [alt]="signs.word"> 
     </ion-item>
   </ion-list>
-  <!-- <ion-searchbar placeholder="Filter Items" (ionInput)="filterItems($event)"></ion-searchbar> -->
-  <!-- <ion-list *ngIf='filteredSigns;else loading' id="keyWordSigns-list">
+  <ion-searchbar placeholder="Filter Items" (ionInput)="filterItems($event)"></ion-searchbar> 
+   <ion-list *ngIf='filteredSigns;else loading' id="keyWordSigns-list">
     <ion-item *ngIf='filteredSigns?.length == 0'>No Results Found</ion-item>
   <ion-grid>
     <ion-row *ngFor='let chunk of filteredSigns | chunks: 2'>
@@ -36,7 +44,7 @@
           <ion-list>
             <ion-item>
               <ion-thumbnail item-right>
-                <!-- <video controls poster='assets/img/vidthumb.jpg'>
+               <video controls poster='assets/img/vidthumb.jpg'>
                   <source src="assets/vid/tickle.mp4" type="video/mp4">
                 </video>
                 <img [src]="signs.image" [alt]="signs.word"> 
@@ -46,11 +54,10 @@
               <ion-icon name="checkmark"></ion-icon>
             </ion-item>
           </ion-list>
-           <!-- <img [src]="signs.image" [alt]="signs.word"> 
+         <img [src]="signs.image" [alt]="signs.word"> 
         </ion-card>
       </ion-col>
       <ion-col *ngIf="chunk.length != 2"></ion-col>
     </ion-row>
   </ion-grid>
   </ion-list> -->
-</ion-content>

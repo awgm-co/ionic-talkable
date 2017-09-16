@@ -4,6 +4,9 @@ import { HttpModule } from '@angular/http';
 import { Storage, IonicStorageModule } from '@ionic/storage';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
+//Android Specific Imports
+import{VideoPlayer} from '@ionic-native/video-player';
+
 import { SuperTabsModule } from 'ionic2-super-tabs';
 import { IonicImageViewerModule } from 'ionic-img-viewer';
 
@@ -13,6 +16,7 @@ import { Talkable } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 import { ChunksPipe, ObjectPipe, KeysPipe } from './app.component'
 
@@ -90,6 +94,8 @@ export function provideSettings(storage: Storage) {
   ],
   providers: [
     StatusBar,
+    InAppBrowser,
+    VideoPlayer,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     FileServiceProvider,

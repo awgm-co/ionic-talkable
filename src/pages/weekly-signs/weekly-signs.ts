@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { FileServiceProvider } from '../../providers/file-service/file-service'
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-weekly-signs',
@@ -11,7 +11,8 @@ export class WeeklySignsPage {
   keyWordSignsChunks: any = [];
   weeklyKeyWordSigns: any = [];
   color: any = '';
-  constructor(public navCtrl: NavController, public navParams: NavParams, private fs: FileServiceProvider) {
+  constructor(private iab: InAppBrowser,public navCtrl: NavController, public navParams: NavParams) {
+    
     this.week = this.navParams.get('w');
     this.color = this.week.number;
     this.weeklyKeyWordSigns = this.week.weeklyKeyWordSigns;
@@ -35,20 +36,39 @@ export class WeeklySignsPage {
     //   }
     // })
   }
-  playVideo(id){
-    let video:any;
-    video = document.getElementById(id);
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.mozRequestFullScreen) {
-      video.mozRequestFullScreen();
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen();
-    }
-    video.play();
+  androidPlayVideo(path){
+    var word = path.toString();
+    word = path.toLowerCase();
+    console.log("path:",path);
+    console.log("word:",word);
+    var keyPath = "assets/vid/"+word+".mp4";
+    var target = "_blank";
+    var vidStyle = "video{webkitDisplayingFullscreen:false;background:#54899b;}";
+    var options = "location=no,hidden=yes,clearcache=yes,clearsessioncache=yes,hardwareback=no,shouldPauseOnSuspend=yes";
+    console.log("Playing video located at: ",keyPath);
+  var vidPlayer = this.iab.create(keyPath, target, options);
+  vidPlayer.insertCSS({ code: vidStyle});
+  vidPlayer.show();
   }
- watched(video, event){
-    event.target.webkitExitFullScreen();
-  }
-  
+/*******************************/
+//DEFAULT CODE 
+/*******************************/
+//   playVideo(id){
+//     let video:any;
+//     video = document.getElementById(id);
+//     if (video.requestFullscreen) {
+//       video.requestFullscreen();
+//     } else if (video.mozRequestFullScreen) {
+//       video.mozRequestFullScreen();
+//     } else if (video.webkitRequestFullscreen) {
+//       video.webkitRequestFullscreen();
+//     }
+//     video.play();
+//   }
+//  watched(video, event){
+//     event.target.webkitExitFullScreen();
+//   }
+/*******************************/
+//END DEFAULT CODE 
+/*******************************/
 }

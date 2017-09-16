@@ -1,0 +1,8 @@
+.inAppBrowserWrap {
+    background-color:#54899b;
+    color: rgba(235,235,235,1.0);
+  }
+  body:-webkit-full-page-media {
+    background-color:#54899b;
+    color: rgba(235,235,235,1.0);
+}
