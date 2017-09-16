@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController } from 'ionic-angular';
-import { Settings } from "../../providers/settings";
+import { NavController, NavParams} from 'ionic-angular';
 import{ ViewController}from 'ionic-angular';
 @Component({
   selector: 'page-ack',
